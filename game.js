@@ -1,3 +1,118 @@
+// ==========================================
+// GEESE HUNT
+// Version 1.0
+// ==========================================
+
+// ---------- Screens ----------
+
+const titleScreen = document.getElementById("titleScreen");
+const gameScreen = document.getElementById("gameScreen");
+const levelComplete = document.getElementById("levelComplete");
+const gameOver = document.getElementById("gameOver");
+
+// ---------- Buttons ----------
+
+const startButton = document.getElementById("startButton");
+const nextLevelButton = document.getElementById("nextLevel");
+const playAgainButton = document.getElementById("playAgain");
+
+// ---------- HUD ----------
+
+const scoreText = document.getElementById("score");
+const timerText = document.getElementById("timer");
+const levelText = document.getElementById("level");
+const comboText = document.getElementById("combo");
+
+const finalScore = document.getElementById("finalScore");
+const levelScore = document.getElementById("levelScore");
+
+// ---------- Game ----------
+
+const gameArea = document.getElementById("gameArea");
+
+let score = 0;
+let combo = 0;
+let level = 1;
+let timeLeft = 30;
+
+let gooseSpeed = 2;
+let gooseCount = 2;
+
+let comboTimeout;
+let timerInterval;
+let difficultyInterval;
+let animationFrame;
+
+let geese = [];
+// ==========================================
+// Utility
+// ==========================================
+
+function hideScreens(){
+
+    titleScreen.classList.remove("active");
+    gameScreen.classList.remove("active");
+    levelComplete.classList.remove("active");
+    gameOver.classList.remove("active");
+
+}
+
+function showTitle(){
+
+    hideScreens();
+
+    titleScreen.classList.add("active");
+
+}
+
+function showGame(){
+
+    hideScreens();
+
+    gameScreen.classList.add("active");
+
+}
+
+function showLevelComplete(){
+
+    hideScreens();
+
+    levelComplete.classList.add("active");
+
+    levelScore.innerHTML="Score: "+score;
+
+}
+
+function showGameOver(){
+
+    hideScreens();
+
+    gameOver.classList.add("active");
+
+    finalScore.innerHTML=score;
+
+}
+// ==========================================
+// Combo
+// ==========================================
+
+function increaseCombo(){
+
+    combo++;
+
+    comboText.innerHTML=combo;
+
+    clearTimeout(comboTimeout);
+
+    comboTimeout=setTimeout(()=>{
+
+        combo=0;
+
+        comboText.innerHTML=0;
+
+    },1500);
+
+}
 // =======================================
 // GEESE HUNT
 // Part 1 - Game Engine
@@ -29,7 +144,10 @@ const timerText = document.getElementById("timer");
 const levelText = document.getElementById("level");
 const finalScoreText = document.getElementById("finalScore");
 const levelScoreText = document.getElementById("levelScore");
+const comboText = document.getElementById("combo");
 
+let combo = 0;
+let comboTimer = null;
 // -----------------------------
 // Game Area
 // -----------------------------
@@ -121,7 +239,8 @@ function resetGame() {
     timeLeft = 30;
     gooseSpeed = 2;
     gooseCount = 2;
-
+combo = 0;
+comboText.textContent = combo;
     scoreText.textContent = score;
     timerText.textContent = timeLeft;
     levelText.textContent = level;
@@ -465,6 +584,77 @@ function createFeathers(x,y){
             feather.remove();
 
         },700);
+
+    }
+
+}
+
+// ======================================
+// Floating Score Popup
+// ======================================
+
+function createScorePopup(x, y) {
+
+    const popup = document.createElement("div");
+
+    popup.className = "scorePopup";
+
+    popup.textContent = "+1";
+
+    popup.style.left = x + "px";
+    popup.style.top = y + "px";
+
+    gameArea.appendChild(popup);
+
+    setTimeout(() => {
+        popup.remove();
+    }, 800);
+
+}
+
+// ======================================
+// Feather Explosion
+// ======================================
+
+function createFeathers(x, y) {
+
+    const featherCount = 12;
+
+    for (let i = 0; i < featherCount; i++) {
+
+        const feather = document.createElement("div");
+
+        feather.className = "feather";
+
+        feather.style.left = x + "px";
+        feather.style.top = y + "px";
+
+        gameArea.appendChild(feather);
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 30 + Math.random() * 60;
+
+        feather.animate(
+            [
+                {
+                    transform: "translate(0px,0px) scale(1)",
+                    opacity: 1
+                },
+                {
+                    transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0.2)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 700,
+                easing: "ease-out",
+                fill: "forwards"
+            }
+        );
+
+        setTimeout(() => {
+            feather.remove();
+        }, 700);
 
     }
 
