@@ -328,20 +328,147 @@ class Goose {
 
     }
 
-    destroy(){
+destroy(){
 
-        score++;
+    score++;
 
-        scoreText.textContent=score;
+    scoreText.textContent=score;
+
+    createScorePopup(
+        this.x,
+        this.y
+    );
+
+    createFeathers(
+        this.x,
+        this.y
+    );
+
+    this.element.animate([
+
+        {
+
+            transform:"scale(1)",
+
+            opacity:1
+
+        },
+
+        {
+
+            transform:"scale(2)",
+
+            opacity:0
+
+        }
+
+    ],{
+
+        duration:180
+
+    });
+
+    setTimeout(()=>{
 
         this.element.remove();
 
-        geese=geese.filter(g=>g!==this);
+    },180);
+
+    geese=geese.filter(
+        g=>g!==this
+    );
+
+}
+
+}
+
+// ======================================
+// Floating Score
+// ======================================
+
+function createScorePopup(x,y){
+
+    const popup=document.createElement("div");
+
+    popup.className="scorePopup";
+
+    popup.innerHTML="+1";
+
+    popup.style.left=x+"px";
+    popup.style.top=y+"px";
+
+    gameArea.appendChild(popup);
+
+    setTimeout(()=>{
+
+        popup.remove();
+
+    },800);
+
+}
+
+// ======================================
+// Feather Explosion
+// ======================================
+
+function createFeathers(x,y){
+
+    for(let i=0;i<10;i++){
+
+        const feather=document.createElement("div");
+
+        feather.className="feather";
+
+        feather.style.left=x+"px";
+        feather.style.top=y+"px";
+
+        gameArea.appendChild(feather);
+
+        const angle=Math.random()*Math.PI*2;
+
+        const speed=40+Math.random()*60;
+
+        feather.animate([
+
+            {
+
+                transform:"translate(0px,0px) scale(1)",
+
+                opacity:1
+
+            },
+
+            {
+
+                transform:
+
+                `translate(${
+                    Math.cos(angle)*speed
+                }px,${
+                    Math.sin(angle)*speed
+                }px) scale(.2)`,
+
+                opacity:0
+
+            }
+
+        ],{
+
+            duration:700,
+
+            easing:"ease-out"
+
+        });
+
+        setTimeout(()=>{
+
+            feather.remove();
+
+        },700);
 
     }
 
 }
-
 // ======================================
 // Spawn Initial
 // ======================================
