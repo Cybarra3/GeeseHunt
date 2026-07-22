@@ -222,20 +222,20 @@ button:active{
 
     position:absolute;
 
-    width:90px;
+    width:70px;
+    height:70px;
 
-    height:90px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    background-size:contain;
-
-    background-repeat:no-repeat;
-
-    background-position:center;
+    font-size:56px;
 
     cursor:pointer;
 
-    transition:
-        transform .08s;
+    transition:transform .08s;
+
+    user-select:none;
 
 }
 
