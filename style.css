@@ -567,6 +567,77 @@ width:70px;
 
 height:70px;
 
+
+/* =======================================
+   Feather Particles
+======================================= */
+
+.feather{
+
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    background:white;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:999;
+
+}
+
+/* =======================================
+   Floating Score
+======================================= */
+
+.scorePopup{
+
+    position:absolute;
+
+    color:#fff;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    text-shadow:
+        2px 2px 4px black;
+
+    pointer-events:none;
+
+    z-index:999;
+
+    animation:popup .8s forwards;
+
+}
+
+@keyframes popup{
+
+0%{
+
+opacity:1;
+
+transform:
+translateY(0px)
+scale(1);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:
+translateY(-70px)
+scale(1.6);
+
+}
+
+}
+
 }
 
 }
