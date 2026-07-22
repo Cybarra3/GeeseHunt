@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+
+<title>Geese Hunt</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- ================= TITLE SCREEN ================= -->
+
+<div id="titleScreen" class="screen active">
+
+    <h1>🪿 Geese Hunt</h1>
+
+    <button id="startButton">
+        START
+    </button>
+
+</div>
+
+
+<!-- ================= GAME SCREEN ================= -->
+
+<div id="gameScreen" class="screen">
+
+    <div id="hud">
+
+        <div>
+            Score
+            <span id="score">0</span>
+        </div>
+
+        <div>
+            Time
+            <span id="timer">30</span>
+        </div>
+
+        <div>
+            Level
+            <span id="level">1</span>
+        </div>
+
+    </div>
+
+    <div id="gameArea"></div>
+
+</div>
+
+
+
+<!-- ================= LEVEL COMPLETE ================= -->
+
+<div id="levelComplete" class="screen">
+
+    <h2>Level Complete!</h2>
+
+    <p id="levelScore"></p>
+
+    <button id="nextLevel">
+        Next Level
+    </button>
+
+</div>
+
+
+
+<!-- ================= GAME OVER ================= -->
+
+<div id="gameOver" class="screen">
+
+    <h2>Time's Up!</h2>
+
+    <p>
+
+        Final Score
+
+        <span id="finalScore">0</span>
+
+    </p>
+
+    <button id="playAgain">
+
+        Play Again
+
+    </button>
+
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>
