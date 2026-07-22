@@ -251,3 +251,167 @@ playAgainButton.onclick = () => {
     startGame();
 
 };
+
+// ======================================
+// Goose Class
+// ======================================
+
+class Goose {
+
+    constructor(){
+
+        this.x=Math.random()*(window.innerWidth-100);
+        this.y=80+Math.random()*(window.innerHeight-180);
+
+        this.size=60+Math.random()*25;
+
+        this.speed=gooseSpeed+(Math.random()*2);
+
+        this.dx=Math.random()<0.5?-1:1;
+        this.dy=Math.random()<0.5?-1:1;
+
+        this.element=document.createElement("div");
+
+        this.element.className="goose";
+
+        this.element.innerHTML="🪿";
+
+        this.element.style.left=this.x+"px";
+        this.element.style.top=this.y+"px";
+        this.element.style.fontSize=this.size+"px";
+
+        gameArea.appendChild(this.element);
+
+        this.element.addEventListener("click",(e)=>{
+
+            e.stopPropagation();
+
+            this.destroy();
+
+        });
+
+    }
+
+    update(){
+
+        this.x+=this.dx*this.speed;
+
+        this.y+=this.dy*this.speed;
+
+        if(this.x<0){
+
+            this.dx=1;
+
+        }
+
+        if(this.x>window.innerWidth-this.size){
+
+            this.dx=-1;
+
+        }
+
+        if(this.y<70){
+
+            this.dy=1;
+
+        }
+
+        if(this.y>window.innerHeight-this.size){
+
+            this.dy=-1;
+
+        }
+
+        this.element.style.left=this.x+"px";
+
+        this.element.style.top=this.y+"px";
+
+    }
+
+    destroy(){
+
+        score++;
+
+        scoreText.textContent=score;
+
+        this.element.remove();
+
+        geese=geese.filter(g=>g!==this);
+
+    }
+
+}
+
+// ======================================
+// Spawn Initial
+// ======================================
+
+function spawnInitialGeese(){
+
+    for(let i=0;i<gooseCount;i++){
+
+        let goose=new Goose();
+
+        geese.push(goose);
+
+    }
+
+}
+
+// ======================================
+// Spawn Extra
+// ======================================
+
+function spawnExtraGeese(){
+
+    let needed=gooseCount-geese.length;
+
+    for(let i=0;i<needed;i++){
+
+        let goose=new Goose();
+
+        geese.push(goose);
+
+    }
+
+}
+
+// ======================================
+// Animation Loop
+// ======================================
+
+function animationLoop(){
+
+    geese.forEach(goose=>{
+
+        goose.update();
+
+    });
+
+    animationFrame=requestAnimationFrame(animationLoop);
+
+}
+
+// ======================================
+// Resize Support
+// ======================================
+
+window.addEventListener("resize",()=>{
+
+    geese.forEach(g=>{
+
+        if(g.x>window.innerWidth-80){
+
+            g.x=window.innerWidth-80;
+
+        }
+
+        if(g.y>window.innerHeight-80){
+
+            g.y=window.innerHeight-80;
+
+        }
+
+    });
+
+});
