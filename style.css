@@ -1,0 +1,572 @@
+/* ==========================
+   RESET
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#222;
+
+    user-select:none;
+}
+
+body{
+
+    position:relative;
+
+}
+
+
+/* ==========================
+   SCREENS
+========================== */
+
+.screen{
+
+    position:absolute;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+}
+
+.screen.active{
+
+    display:flex;
+
+}
+
+
+/* ==========================
+   TITLE SCREEN
+========================== */
+
+#titleScreen{
+
+    background:linear-gradient(
+        #68c5ff,
+        #bcecff,
+        #6fdc73
+    );
+
+}
+
+#titleScreen h1{
+
+    font-size:58px;
+
+    color:white;
+
+    text-shadow:
+        3px 3px 8px black;
+
+    margin-bottom:60px;
+
+    animation:titleFloat 3s infinite ease-in-out;
+
+}
+
+
+/* ==========================
+   BUTTONS
+========================== */
+
+button{
+
+    border:none;
+
+    cursor:pointer;
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    border-radius:18px;
+
+    padding:22px 70px;
+
+    transition:.2s;
+
+}
+
+button:active{
+
+    transform:scale(.95);
+
+}
+
+#startButton{
+
+    background:#38d430;
+
+    color:white;
+
+    box-shadow:0 8px #1d7f1d;
+
+}
+
+#nextLevel{
+
+    background:#2196F3;
+
+    color:white;
+
+    margin-top:25px;
+
+}
+
+#playAgain{
+
+    background:#32CD32;
+
+    color:white;
+
+    margin-top:25px;
+
+}
+
+
+/* ==========================
+   GAME SCREEN
+========================== */
+
+#gameScreen{
+
+    background:#7fcfff;
+
+}
+
+
+/* ==========================
+   HUD
+========================== */
+
+#hud{
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:70px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.55);
+
+    color:white;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    z-index:999;
+
+}
+
+
+/* ==========================
+   GAME AREA
+========================== */
+
+#gameArea{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================
+   GOOSE
+========================== */
+
+.goose{
+
+    position:absolute;
+
+    width:90px;
+
+    height:90px;
+
+    background-size:contain;
+
+    background-repeat:no-repeat;
+
+    background-position:center;
+
+    cursor:pointer;
+
+    transition:
+        transform .08s;
+
+}
+
+.goose:active{
+
+    transform:scale(.85);
+
+}
+
+
+/* ==========================
+   FLOATING SCORE
+========================== */
+
+.floatingScore{
+
+    position:absolute;
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    text-shadow:
+        2px 2px black;
+
+    pointer-events:none;
+
+    animation:scoreUp .8s forwards;
+
+}
+
+
+/* ==========================
+   PARTICLES
+========================== */
+
+.feather{
+
+    position:absolute;
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    background:white;
+
+    pointer-events:none;
+
+    animation:feather .8s forwards;
+
+}
+
+
+/* ==========================
+   GAME OVER
+========================== */
+
+#gameOver{
+
+    background:rgba(0,0,0,.85);
+
+    color:white;
+
+    text-align:center;
+
+}
+
+#gameOver h2{
+
+    font-size:60px;
+
+    margin-bottom:30px;
+
+}
+
+#gameOver p{
+
+    font-size:34px;
+
+}
+
+
+/* ==========================
+   LEVEL COMPLETE
+========================== */
+
+#levelComplete{
+
+    background:rgba(0,0,0,.8);
+
+    color:white;
+
+    text-align:center;
+
+}
+
+#levelComplete h2{
+
+    font-size:54px;
+
+    margin-bottom:25px;
+
+}
+
+
+/* ==========================
+   ENVIRONMENTS
+========================== */
+
+.farm{
+
+    background:
+
+    linear-gradient(
+
+    #6acbff 0%,
+
+    #bfefff 45%,
+
+    #66d366 46%,
+
+    #3ba93b 100%
+
+    );
+
+}
+
+.snow{
+
+    background:
+
+    linear-gradient(
+
+    #90b7ff,
+
+    #d8eeff,
+
+    white
+
+    );
+
+}
+
+.swamp{
+
+    background:
+
+    linear-gradient(
+
+    #243424,
+
+    #456b45,
+
+    #223322
+
+    );
+
+}
+
+
+/* ==========================
+   SHAKE
+========================== */
+
+.shake{
+
+    animation:shake .25s;
+
+}
+
+
+/* ==========================
+   TITLE FLOAT
+========================== */
+
+@keyframes titleFloat{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+
+/* ==========================
+   SCORE POP
+========================== */
+
+@keyframes scoreUp{
+
+0%{
+
+opacity:1;
+
+transform:
+translateY(0);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:
+translateY(-80px);
+
+}
+
+}
+
+
+/* ==========================
+   FEATHER
+========================== */
+
+@keyframes feather{
+
+0%{
+
+opacity:1;
+
+transform:
+scale(1)
+translate(0,0);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:
+scale(.2)
+translate(40px,-50px);
+
+}
+
+}
+
+
+/* ==========================
+   SCREEN SHAKE
+========================== */
+
+@keyframes shake{
+
+0%{
+
+transform:translate(0,0);
+
+}
+
+25%{
+
+transform:translate(-5px,4px);
+
+}
+
+50%{
+
+transform:translate(5px,-5px);
+
+}
+
+75%{
+
+transform:translate(-4px,2px);
+
+}
+
+100%{
+
+transform:translate(0,0);
+
+}
+
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width:768px){
+
+#titleScreen h1{
+
+font-size:42px;
+
+}
+
+button{
+
+font-size:26px;
+
+padding:20px 45px;
+
+}
+
+#hud{
+
+font-size:18px;
+
+height:60px;
+
+}
+
+.goose{
+
+width:70px;
+
+height:70px;
+
+}
+
+}
